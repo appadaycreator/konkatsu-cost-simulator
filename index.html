@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>婚活費用シミュレーター - 方法別の総費用を無料計算</title>
+<meta name="description" content="婚活にかかる総費用を方法別（マッチングアプリ・婚活パーティ・結婚相談所）に無料でシミュレーション。期間・デート費用も含めた現実的な総費用を試算します。">
+<meta property="og:title" content="婚活費用シミュレーター | 方法別の総費用を無料計算">
+<meta property="og:description" content="婚活方法・期間・デート費用から総費用を試算。マッチングアプリ〜結婚相談所まで比較。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://appadaycreator.github.io/konkatsu-cost-simulator/">
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TXQGZRF9');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8427583028015858" crossorigin="anonymous"></script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","s3t9vl8h3v");</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #f9a8d4 100%); min-height: 100vh; }
+  .card { background: white; border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,0.09); }
+  .btn-primary { background: #db2777; color: white; border: none; border-radius: 0.75rem; padding: 0.875rem 2rem; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all 0.2s; width: 100%; display: block; }
+  .btn-primary:hover { background: #be185d; transform: translateY(-1px); }
+  .input-field { border: 2px solid #fce7f3; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 1rem; width: 100%; transition: border-color 0.2s; box-sizing: border-box; }
+  .input-field:focus { outline: none; border-color: #db2777; }
+  label { display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 0.375rem; }
+  select.input-field { appearance: none; background: white url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%236b7280' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center; }
+  .cost-bar { height: 12px; border-radius: 9999px; background: #f9a8d4; }
+  .cost-bar-fill { height: 12px; border-radius: 9999px; background: #db2777; transition: width 0.6s ease; }
+</style>
+</head>
+<body class="font-sans">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXQGZRF9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="max-w-lg mx-auto px-4 py-10">
+
+  <div class="text-center mb-8">
+    <div class="text-6xl mb-4">💍</div>
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">婚活費用シミュレーター</h1>
+    <p class="text-gray-600 text-sm">婚活方法・期間・デート費用から<br>現実的な総費用を無料で試算します</p>
+  </div>
+
+  <div class="card p-6 mb-6">
+    <h2 class="font-bold text-gray-800 mb-4">💰 条件を入力してください</h2>
+    <div class="space-y-4">
+      <div>
+        <label>主な婚活方法</label>
+        <select id="method" class="input-field">
+          <option value="app">マッチングアプリ（Pairs・with等）</option>
+          <option value="party">婚活パーティ・お見合いパーティ</option>
+          <option value="agency">結婚相談所</option>
+          <option value="mix">複数の方法を組み合わせ</option>
+        </select>
+      </div>
+      <div>
+        <label>婚活期間の見込み（ヶ月）</label>
+        <input type="number" id="months" class="input-field" placeholder="例: 12" min="1" max="60" value="12">
+      </div>
+      <div>
+        <label>月あたりのデート・外出費（万円）</label>
+        <input type="number" id="date-cost" class="input-field" placeholder="例: 3" min="0" step="0.5" value="3">
+      </div>
+      <div>
+        <label>ファッション・外見磨きへの月額投資（万円）</label>
+        <input type="number" id="fashion-cost" class="input-field" placeholder="例: 1" min="0" step="0.5" value="1">
+      </div>
+    </div>
+    <button class="btn-primary mt-5" onclick="calculate()">費用を計算する →</button>
+  </div>
+
+  <div id="results" class="card p-6 mb-4" style="display:none;">
+    <h2 class="font-bold text-gray-800 mb-4">📊 シミュレーション結果</h2>
+    <div class="text-center mb-6">
+      <div class="text-gray-500 text-sm mb-1">婚活総費用の目安</div>
+      <div class="text-4xl font-bold text-pink-600" id="r-total">0万円</div>
+      <div class="text-gray-400 text-sm" id="r-period"></div>
+    </div>
+
+    <div class="space-y-3 mb-4">
+      <div>
+        <div class="flex justify-between text-sm mb-1">
+          <span class="text-gray-600">サービス費（入会費・月会費）</span>
+          <span class="font-bold" id="r-service"></span>
+        </div>
+        <div class="cost-bar"><div class="cost-bar-fill" id="bar-service" style="width:0%"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-sm mb-1">
+          <span class="text-gray-600">デート・外出費</span>
+          <span class="font-bold" id="r-date"></span>
+        </div>
+        <div class="cost-bar"><div class="cost-bar-fill" id="bar-date" style="width:0%"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-sm mb-1">
+          <span class="text-gray-600">ファッション・外見磨き</span>
+          <span class="font-bold" id="r-fashion"></span>
+        </div>
+        <div class="cost-bar"><div class="cost-bar-fill" id="bar-fashion" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="bg-pink-50 rounded-lg p-3 text-sm" id="r-advice"></div>
+  </div>
+
+  <div id="affiliate-section" class="card p-6 mb-4" style="display:none;">
+    <h3 class="font-bold text-gray-800 mb-3">💑 コスパ良く婚活を始めよう</h3>
+    <div id="aff-area"></div>
+    <div class="mt-3 text-xs text-center text-gray-400">
+      <a href="/matchmaking-style-test/" class="text-pink-500 underline">婚活スタイル診断も試してみる →</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var methodCosts = {
+  app:    { monthly: 3000, init: 0, name: "マッチングアプリ" },
+  party:  { monthly: 10000, init: 0, name: "婚活パーティ" },
+  agency: { monthly: 30000, init: 200000, name: "結婚相談所" },
+  mix:    { monthly: 15000, init: 50000, name: "複合婚活" }
+};
+
+var appAffiliate = '<div class="bg-pink-50 border border-pink-200 rounded-xl p-4 mb-2"><div class="font-bold text-pink-800 mb-1">まずはマッチングアプリから始めよう</div><p class="text-xs text-gray-600 mb-3">月3,000円〜で始められるコスパ最高の婚活方法。Pairs・with等を比較。</p><a href="A8_MATCHING_APP_URL_PLACEHOLDER" target="_blank" rel="noopener sponsored" class="block text-center bg-pink-500 text-white font-bold py-3 rounded-lg text-sm hover:bg-pink-600 transition">無料で始める →</a></div>';
+var agencyAffiliate = '<div class="bg-pink-50 border border-pink-200 rounded-xl p-4 mb-2"><div class="font-bold text-pink-800 mb-1">結婚相談所の無料カウンセリング</div><p class="text-xs text-gray-600 mb-3">プロのカウンセラーによるサポートで成婚率アップ。まず無料相談から。</p><a href="A8_AGENCY_URL_PLACEHOLDER" target="_blank" rel="noopener sponsored" class="block text-center bg-pink-500 text-white font-bold py-3 rounded-lg text-sm hover:bg-pink-600 transition">無料カウンセリングを予約 →</a></div>';
+
+function calculate() {
+  var method = document.getElementById('method').value;
+  var months = parseInt(document.getElementById('months').value) || 12;
+  var dateCost = (parseFloat(document.getElementById('date-cost').value)||3) * 10000;
+  var fashionCost = (parseFloat(document.getElementById('fashion-cost').value)||1) * 10000;
+
+  var mc = methodCosts[method];
+  var serviceCost = mc.init + mc.monthly * months;
+  var totalDate = dateCost * months;
+  var totalFashion = fashionCost * months;
+  var total = serviceCost + totalDate + totalFashion;
+
+  document.getElementById('r-total').textContent = Math.round(total/10000) + '万円';
+  document.getElementById('r-period').textContent = months + 'ヶ月間の目安（' + mc.name + '）';
+  document.getElementById('r-service').textContent = Math.round(serviceCost/10000) + '万円';
+  document.getElementById('r-date').textContent = Math.round(totalDate/10000) + '万円';
+  document.getElementById('r-fashion').textContent = Math.round(totalFashion/10000) + '万円';
+
+  var max = Math.max(serviceCost, totalDate, totalFashion, 1);
+  document.getElementById('bar-service').style.width = Math.round(serviceCost/max*100) + '%';
+  document.getElementById('bar-date').style.width = Math.round(totalDate/max*100) + '%';
+  document.getElementById('bar-fashion').style.width = Math.round(totalFashion/max*100) + '%';
+
+  var adviceEl = document.getElementById('r-advice');
+  var monthlyCost = Math.round(total/months/10000*10)/10;
+  if(method==='agency') {
+    adviceEl.textContent = '💡 結婚相談所は初期費用が高めですが、プロのサポートで成婚率が高い傾向があります。月あたり'+monthlyCost+'万円の投資として考えましょう。';
+  } else if(method==='app') {
+    adviceEl.textContent = '💡 マッチングアプリは最もコスパが良い婚活手段。月'+monthlyCost+'万円程度で始められます。写真・プロフィールの質を高めると成功率が上がります。';
+  } else {
+    adviceEl.textContent = '💡 月あたりの婚活コストは約'+monthlyCost+'万円です。コストを意識しながら効率的な婚活を心がけましょう。';
+  }
+
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('affiliate-section').style.display = 'block';
+  document.getElementById('aff-area').innerHTML = method==='agency' ? agencyAffiliate : appAffiliate;
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
