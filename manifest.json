@@ -4,7 +4,7 @@
   "description": "婚活方法・期間・交際費用を入力して総費用を無料計算。方法別の費用比較と節約アドバイス付き。",
   "start_url": "/konkatsu-cost-simulator/",
   "display": "standalone",
-  "background_color": "#f8faf9",
+  "background_color": "#ffffff",
   "theme_color": "#7c3aed",
   "lang": "ja",
   "icons": [
